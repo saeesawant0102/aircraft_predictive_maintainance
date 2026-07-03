@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+
+venv/
+.env
+
+.ipynb_checkpoints/
+
+uploads/
+
+*.pkl
+
+node_modules/
+
+dist/
+
+build/
