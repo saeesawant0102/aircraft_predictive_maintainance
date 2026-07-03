@@ -48,9 +48,26 @@ async def predict(
 
     predictions = run_predictions(df)
 
-    return predictions.head().to_dict(
-        orient="records"
+    predictions.to_csv(
+        "../data/dashboard_predictions.csv",
+        index=False
     )
+
+    fleet_snapshot = (
+        predictions
+        .groupby("engine_id")
+        .tail(1)
+    )
+
+    fleet_snapshot.to_csv(
+        "../data/fleet_dashboard.csv",
+        index=False
+    )
+
+    return {
+        "message": "Predictions generated successfully",
+        "records": len(predictions)
+    }
 
 @app.get("/summary")
 def get_summary():

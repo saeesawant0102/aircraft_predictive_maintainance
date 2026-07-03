@@ -1,12 +1,28 @@
+import Layout from "../components/Layout";
 import KPICards from "../components/KPICards";
+import FleetTable from "../components/FleetTable";
+import HealthDistribution from "../components/HealthDistribution";
+
+import "../components/FleetTable.css";
 
 function Dashboard() {
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Aircraft Predictive Maintenance Dashboard</h1>
-
+    <Layout>
       <KPICards />
-    </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "2fr 1fr",
+          gap: "20px",
+          marginTop: "30px",
+        }}
+      >
+        <FleetTable />
+
+        <HealthDistribution />
+      </div>
+    </Layout>
   );
 }
 

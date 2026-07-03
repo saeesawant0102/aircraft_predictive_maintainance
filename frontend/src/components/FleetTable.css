@@ -1,0 +1,29 @@
+.fleet-table-card {
+  background: #051f2b;
+  border: 1px solid #0b556b;
+  border-radius: 20px;
+  padding: 25px;
+}
+
+.fleet-table-card h3 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.fleet-table-card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.fleet-table-card th {
+  color: #6ed7ff;
+  text-align: left;
+  padding: 14px;
+  border-bottom: 1px solid #123849;
+}
+
+.fleet-table-card td {
+  color: white;
+  padding: 14px;
+  border-bottom: 1px solid #123849;
+}
