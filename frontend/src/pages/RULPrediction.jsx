@@ -13,6 +13,8 @@ import RemainingLifeGauge from "../components/RULPrediction/RemainingLifeGauge";
 import RiskDistributionChart from "../components/RULPrediction/RiskDistributionChart";
 import MaintenanceTimeline from "../components/RULPrediction/MaintenanceTimeline";
 
+import MaintenanceRecommendation from "../components/RULPrediction/MaintenanceRecommendation";
+
 function RULPrediction() {
 
   const [fleet, setFleet] = useState([]);
@@ -93,6 +95,10 @@ function RULPrediction() {
 
 <MaintenanceTimeline
   latest={history[history.length-1]}
+/>
+
+<MaintenanceRecommendation
+  latest={history[history.length - 1]}
 />
 
       </div>

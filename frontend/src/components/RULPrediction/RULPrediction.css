@@ -485,3 +485,117 @@ display:none;
 }
 
 }
+
+/*====================================================
+MAINTENANCE RECOMMENDATION
+====================================================*/
+
+.recommendation-card{
+
+    background:#051F2B;
+
+    border:1px solid #0B556B;
+
+    border-radius:20px;
+
+    padding:28px;
+
+    transition:.25s;
+
+}
+
+.recommendation-card:hover{
+
+    border-color:#00F5D4;
+
+    box-shadow:0 12px 30px rgba(0,245,212,.08);
+
+}
+
+.recommendation-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.recommendation-header h2{
+
+    color:white;
+
+    margin:0;
+
+}
+
+.priority-badge{
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    color:white;
+
+    font-weight:700;
+
+    font-size:13px;
+
+    letter-spacing:.5px;
+
+}
+
+.recommendation-card p{
+
+    color:#A8C3CF;
+
+    line-height:1.8;
+
+    margin-bottom:25px;
+
+    font-size:15px;
+
+}
+
+.maintenance-info{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+}
+
+.maintenance-info div{
+
+    background:#072534;
+
+    border-radius:14px;
+
+    padding:18px;
+
+}
+
+.maintenance-info span{
+
+    display:block;
+
+    color:#8CB4C5;
+
+    margin-bottom:10px;
+
+    font-size:14px;
+
+}
+
+.maintenance-info strong{
+
+    color:white;
+
+    font-size:20px;
+
+}

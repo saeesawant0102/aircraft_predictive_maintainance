@@ -5,7 +5,7 @@ import FleetOverview from "./pages/FleetOverview";
 import EngineDetails from "./pages/EngineDetails";
 import SensorAnalysis from "./pages/SensorAnalysis";
 import RULPrediction from "./pages/RULPrediction";
-import HealthAssessment from "./pages/HealthAssessment";
+import ReportsHistory from "./pages/ReportsHistory";
 
 function App() {
   return (
@@ -38,8 +38,8 @@ function App() {
         />
 
         <Route
-          path="/health"
-          element={<HealthAssessment />}
+          path="/reports"
+          element={<ReportsHistory />}
         />
       </Routes>
     </BrowserRouter>

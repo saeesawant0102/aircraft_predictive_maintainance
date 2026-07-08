@@ -22,8 +22,8 @@ const menuItems = [
     path: "/rul",
   },
   {
-    name: "Health Assessment",
-    path: "/health",
+    name: "Reports & History",
+    path: "/reports",
   },
 ];
 
