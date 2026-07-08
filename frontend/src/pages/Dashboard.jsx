@@ -1,4 +1,5 @@
 import Layout from "../components/Layout";
+import UploadPanel from "../components/UploadPanel";
 import KPICards from "../components/KPICards";
 import FleetTable from "../components/FleetTable";
 import HealthDistribution from "../components/HealthDistribution";
@@ -8,6 +9,9 @@ import "../components/FleetTable.css";
 function Dashboard() {
   return (
     <Layout>
+
+      <UploadPanel />
+
       <KPICards />
 
       <div
@@ -22,6 +26,7 @@ function Dashboard() {
 
         <HealthDistribution />
       </div>
+
     </Layout>
   );
 }

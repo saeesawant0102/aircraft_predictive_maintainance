@@ -7,6 +7,7 @@ from dashboard_routes import (
     get_snapshot_data,
     get_predictions_data
 )
+from fastapi.responses import FileResponse
 
 app = FastAPI(
     title="Aircraft Engine Predictive Maintenance API"
@@ -114,6 +115,15 @@ def get_fleet():
 
     return fleet_df.to_dict(
         orient="records"
+    )
+
+@app.get("/fleet/download")
+def download_fleet():
+
+    return FileResponse(
+        "../data/fleet_dashboard.csv",
+        filename="fleet_dashboard.csv",
+        media_type="text/csv",
     )
 
 @app.get("/critical")

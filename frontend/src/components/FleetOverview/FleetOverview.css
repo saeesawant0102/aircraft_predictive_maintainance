@@ -1,0 +1,375 @@
+/* ===========================
+   AeroGuard Fleet Overview
+=========================== */
+
+:root {
+  --bg: #02131c;
+  --card: #051f2b;
+  --card-light: #082a39;
+  --border: #0b556b;
+
+  --accent: #00f5d4;
+  --accent-light: #42ffe6;
+
+  --text: #ffffff;
+  --text-secondary: #8eaec0;
+
+  --healthy: #38d27a;
+  --warning: #ffbe0b;
+  --critical: #ff4d4f;
+
+  --shadow: rgba(0, 245, 212, 0.12);
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.fleet-header {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 24px;
+}
+
+.fleet-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.fleet-header-title h2 {
+  color: var(--text);
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.fleet-header-title p {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.fleet-controls {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.fleet-input,
+.fleet-select {
+  background: var(--bg);
+  color: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 18px;
+  font-size: 14px;
+  min-width: 220px;
+  transition: .25s;
+}
+
+.fleet-input:focus,
+.fleet-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 15px var(--shadow);
+}
+
+.export-btn {
+  background: var(--accent);
+  color: #031722;
+  border: none;
+  border-radius: 12px;
+  padding: 13px 22px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.export-btn:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   TABLE CARD
+=========================== */
+
+.fleet-table-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.table-wrapper {
+  max-height: 700px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+/* ===========================
+   TABLE
+=========================== */
+
+.fleet-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.fleet-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.fleet-table thead tr {
+  background: #031722;
+}
+
+.fleet-table th {
+  color: #61d6ff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 18px 22px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.fleet-table td {
+  padding: 18px 22px;
+  color: white;
+  font-size: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.fleet-table tbody tr {
+  transition: .25s;
+}
+
+.fleet-table tbody tr:nth-child(even) {
+  background: rgba(255,255,255,0.015);
+}
+
+.fleet-table tbody tr:hover {
+  background: rgba(0,245,212,.08);
+  cursor: pointer;
+}
+
+/* ===========================
+   ENGINE ID
+=========================== */
+
+.engine-id {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ===========================
+   STATUS BADGES
+=========================== */
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 15px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.status-healthy {
+  background: rgba(56,210,122,.15);
+  color: var(--healthy);
+}
+
+.status-warning {
+  background: rgba(255,190,11,.15);
+  color: var(--warning);
+}
+
+.status-critical {
+  background: rgba(255,77,79,.15);
+  color: var(--critical);
+}
+
+/* ===========================
+   RECOMMENDATION
+=========================== */
+
+.recommendation {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.view-btn {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 9px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.view-btn:hover {
+  background: var(--accent);
+  color: #031722;
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   PAGINATION
+=========================== */
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.page-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.page-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.page-btn:hover {
+  background: var(--accent);
+  color: black;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 1100px) {
+
+  .fleet-header-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .fleet-controls {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .fleet-input,
+  .fleet-select {
+    width: 100%;
+  }
+
+  .export-btn {
+    width: 100%;
+  }
+
+}
+
+/* ===========================
+   SUMMARY STRIP
+=========================== */
+
+.summary-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.summary-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:22px;
+    transition:.25s;
+}
+
+.summary-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(0,245,212,.08);
+}
+
+.summary-card h4{
+    color:var(--text-secondary);
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.summary-card h2{
+    font-size:34px;
+    color:white;
+}
+
+.summary-blue h2{
+    color:#61D6FF;
+}
+
+.summary-green h2{
+    color:#38D27A;
+}
+
+.summary-yellow h2{
+    color:#FFBE0B;
+}
+
+.summary-red h2{
+    color:#FF4D4F;
+}
+
+@media(max-width:1000px){
+
+.summary-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:650px){
+
+.summary-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+.active-page{
+
+background:#00F5D4;
+
+color:#031722;
+
+font-weight:bold;
+
+}
+
+.page-btn:disabled{
+
+opacity:.4;
+
+cursor:not-allowed;
+
+}
