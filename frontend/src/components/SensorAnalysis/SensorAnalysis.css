@@ -1,0 +1,351 @@
+/*====================================================
+PAGE
+====================================================*/
+
+.sensor-page{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:28px;
+
+}
+
+/*====================================================
+HEADER
+====================================================*/
+
+.sensor-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#051F2B;
+
+    border:1px solid #0B556B;
+
+    border-radius:20px;
+
+    padding:28px 32px;
+
+}
+
+.sensor-header h1{
+
+    color:white;
+
+    margin-bottom:8px;
+
+    font-size:34px;
+
+}
+
+.sensor-header p{
+
+    color:#8AAFC0;
+
+}
+
+.selector-box{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.selector-box label{
+
+    color:#8AAFC0;
+
+    font-size:14px;
+
+}
+
+.selector-box select{
+
+    background:#031722;
+
+    color:white;
+
+    border:1px solid #0B556B;
+
+    border-radius:12px;
+
+    padding:12px 18px;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    min-width:220px;
+
+}
+
+.selector-box select:focus{
+
+    outline:none;
+
+    border-color:#00F5D4;
+
+}
+
+/*========================================
+TREND CHART
+========================================*/
+
+.sensor-chart-card{
+
+    background:#051F2B;
+
+    border:1px solid #0B556B;
+
+    border-radius:20px;
+
+    padding:25px;
+
+}
+
+.chart-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.chart-header h2{
+
+    color:white;
+
+}
+
+.chart-header select{
+
+    background:#031722;
+
+    color:white;
+
+    border:1px solid #0B556B;
+
+    border-radius:10px;
+
+    padding:10px 14px;
+
+}
+
+/*=========================================
+SENSOR STATS TABLE
+=========================================*/
+
+.sensor-stats-table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:15px;
+
+}
+
+.sensor-stats-table th{
+
+padding:18px;
+
+text-align:left;
+
+color:#64D3FF;
+
+border-bottom:1px solid #0B556B;
+
+font-weight:600;
+
+}
+
+.sensor-stats-table td{
+
+padding:18px;
+
+color:white;
+
+border-bottom:1px solid rgba(11,85,107,.45);
+
+}
+
+.sensor-stats-table tbody tr{
+
+transition:.2s;
+
+}
+
+.sensor-stats-table tbody tr:hover{
+
+background:#082635;
+
+}
+
+.positive-change{
+
+color:#38D27A;
+
+font-weight:700;
+
+}
+
+.negative-change{
+
+color:#FF4D4F;
+
+font-weight:700;
+
+}
+
+/*========================================
+SUMMARY CARDS
+========================================*/
+
+.sensor-summary-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:22px;
+
+}
+
+.sensor-summary-card{
+
+    background:#051F2B;
+
+    border:1px solid #0B556B;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    transition:.25s;
+
+}
+
+.sensor-summary-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:#00F5D4;
+
+    box-shadow:0 12px 25px rgba(0,245,212,.08);
+
+}
+
+.sensor-card-title{
+
+    color:#8AAFC0;
+
+    font-size:15px;
+
+    margin-bottom:16px;
+
+}
+
+.sensor-card-value{
+
+    font-size:36px;
+
+    font-weight:700;
+
+}
+
+@media(max-width:1100px){
+
+.sensor-summary-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:700px){
+
+.sensor-summary-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+.chart-subtitle{
+
+color:#8AAFC0;
+
+font-size:14px;
+
+}
+
+/*=========================================
+CUSTOM TOOLTIP
+=========================================*/
+
+.custom-tooltip{
+
+    background:#031722;
+
+    border:1px solid #00F5D4;
+
+    border-radius:12px;
+
+    padding:14px 18px;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.35);
+
+}
+
+.custom-tooltip h4{
+
+    color:#00F5D4;
+
+    margin-bottom:8px;
+
+    font-size:15px;
+
+}
+
+.custom-tooltip p{
+
+    color:white;
+
+    margin:0;
+
+    font-size:14px;
+
+}
+
+.custom-tooltip strong{
+
+    color:#38D27A;
+
+}
+
+.chart-subtitle{
+
+    color:#86B8CC;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    margin-top:6px;
+
+}
