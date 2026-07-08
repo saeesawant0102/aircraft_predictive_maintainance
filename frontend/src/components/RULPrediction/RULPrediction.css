@@ -1,0 +1,487 @@
+/*====================================================
+PAGE
+====================================================*/
+
+.rul-page{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:28px;
+
+}
+
+/*====================================================
+HEADER
+====================================================*/
+
+.rul-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#051F2B;
+
+    border:1px solid #0B556B;
+
+    border-radius:20px;
+
+    padding:30px 34px;
+
+    transition:.25s;
+
+}
+
+.rul-header:hover{
+
+    border-color:#00F5D4;
+
+    box-shadow:0 12px 30px rgba(0,245,212,.08);
+
+}
+
+.rul-header h1{
+
+    color:white;
+
+    font-size:36px;
+
+    margin-bottom:8px;
+
+    font-weight:700;
+
+}
+
+.rul-header p{
+
+    color:#8CB4C5;
+
+    font-size:16px;
+
+}
+
+.selector-box{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.selector-box label{
+
+    color:#8CB4C5;
+
+    font-size:14px;
+
+}
+
+.selector-box select{
+
+    background:#031722;
+
+    color:white;
+
+    border:1px solid #0B556B;
+
+    border-radius:12px;
+
+    padding:12px 18px;
+
+    min-width:220px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.selector-box select:hover{
+
+    border-color:#00F5D4;
+
+}
+
+.selector-box select:focus{
+
+    outline:none;
+
+    border-color:#00F5D4;
+
+}
+
+/*====================================================
+SUMMARY CARDS
+====================================================*/
+
+.rul-summary-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:22px;
+
+}
+
+.rul-summary-card{
+
+    background:#051F2B;
+
+    border:1px solid #0B556B;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    transition:.25s;
+
+    cursor:pointer;
+
+}
+
+.rul-summary-card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#00F5D4;
+
+    box-shadow:0 12px 30px rgba(0,245,212,.12);
+
+}
+
+.rul-card-title{
+
+    color:#8CB4C5;
+
+    font-size:15px;
+
+    margin-bottom:18px;
+
+}
+
+.rul-card-value{
+
+    font-size:38px;
+
+    font-weight:700;
+
+}
+
+/*====================================================
+COMMON CARDS
+====================================================*/
+
+.rul-chart-card,
+.gauge-card,
+.timeline-card{
+
+    background:#051F2B;
+
+    border:1px solid #0B556B;
+
+    border-radius:20px;
+
+    padding:26px;
+
+    transition:.25s;
+
+}
+
+.rul-chart-card:hover,
+.gauge-card:hover,
+.timeline-card:hover{
+
+    border-color:#00F5D4;
+
+    box-shadow:0 12px 28px rgba(0,245,212,.08);
+
+}
+
+.rul-chart-card h2,
+.gauge-card h2,
+.timeline-card h2{
+
+    color:white;
+
+    margin-bottom:6px;
+
+}
+
+.chart-subtitle{
+
+    color:#8CB4C5;
+
+    font-size:14px;
+
+    margin-top:4px;
+
+}
+
+/*====================================================
+BOTTOM GRID
+====================================================*/
+
+.rul-bottom-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:24px;
+
+}
+
+/*====================================================
+GAUGE
+====================================================*/
+
+.gauge-card{
+
+    text-align:center;
+
+}
+
+.gauge-value{
+
+    font-size:62px;
+
+    color:#00F5D4;
+
+    font-weight:700;
+
+    margin:25px 0 20px;
+
+}
+
+.gauge-bar{
+
+    width:100%;
+
+    height:16px;
+
+    background:#082432;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+    margin-bottom:18px;
+
+}
+
+.gauge-fill{
+
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        #00F5D4,
+        #38D27A
+    );
+
+    border-radius:999px;
+
+    transition:.5s;
+
+}
+
+.gauge-card p{
+
+    color:#8CB4C5;
+
+    font-size:15px;
+
+}
+
+/*====================================================
+TIMELINE
+====================================================*/
+
+.timeline{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-top:35px;
+
+    position:relative;
+
+}
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:6%;
+
+    right:6%;
+
+    top:8px;
+
+    height:2px;
+
+    background:#0B556B;
+
+}
+
+.timeline-item{
+
+    flex:1;
+
+    text-align:center;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.timeline-item h3{
+
+    color:white;
+
+    margin:14px 0 6px;
+
+    font-size:17px;
+
+}
+
+.timeline-item p{
+
+    color:#8CB4C5;
+
+    font-size:14px;
+
+}
+
+.timeline-dot{
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    border:3px solid #051F2B;
+
+}
+
+.timeline-dot{
+
+    background:#38D27A;
+
+}
+
+.yellow{
+
+    background:#FFBE0B;
+
+}
+
+.orange{
+
+    background:#FF8A00;
+
+}
+
+.red{
+
+    background:#FF4D4F;
+
+}
+
+/*====================================================
+RECHARTS
+====================================================*/
+
+.recharts-cartesian-axis-tick-value{
+
+    fill:#AFC7D6;
+
+}
+
+.recharts-tooltip-wrapper{
+
+    outline:none;
+
+}
+
+.recharts-default-tooltip{
+
+    background:#031722 !important;
+
+    border:1px solid #00F5D4 !important;
+
+    border-radius:12px !important;
+
+    color:white !important;
+
+}
+
+/*====================================================
+RESPONSIVE
+====================================================*/
+
+@media(max-width:1200px){
+
+.rul-summary-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.rul-bottom-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:700px){
+
+.rul-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:25px;
+
+}
+
+.rul-summary-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.timeline{
+
+flex-direction:column;
+
+gap:30px;
+
+}
+
+.timeline::before{
+
+display:none;
+
+}
+
+}

@@ -174,3 +174,16 @@ def get_engine(engine_id: int):
         )
 
     return engine_data
+
+@app.get("/engine/{engine_id}/history")
+def get_engine_history(engine_id: int):
+
+    history = get_predictions_data()
+
+    history = history[
+        history["engine_id"] == engine_id
+    ]
+
+    return history.to_dict(
+        orient="records"
+    )

@@ -1,35 +1,67 @@
+import { UserCog } from "lucide-react";
+
+import "./Header.css";
+
 function Header() {
+
   return (
-    <div
-      style={{
-        height: "90px",
-        borderBottom: "1px solid #08384A",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0 30px",
-      }}
-    >
-      <div>
-        <h2>Dashboard</h2>
-        <p style={{ color: "#7CA4B8" }}>
-          Real-time fleet health overview
+
+    <div className="header">
+
+      <div className="header-title">
+
+        <h2>
+
+          Dashboard
+
+        </h2>
+
+        <p>
+
+          Aircraft Engine Predictive Maintenance Dashboard
+
         </p>
+
       </div>
 
-      <input
-        placeholder="Search engines..."
-        style={{
-          background: "#031722",
-          border: "1px solid #0B556B",
-          padding: "12px 20px",
-          borderRadius: "10px",
-          color: "white",
-          width: "300px",
-        }}
-      />
+      <div className="admin-profile">
+
+        <div className="admin-avatar">
+
+          <UserCog
+            size={28}
+          />
+
+        </div>
+
+        <div className="admin-info">
+
+          <h4>
+
+            Admin
+
+          </h4>
+
+          <p>
+
+            Maintenance Engineer
+
+          </p>
+
+          <p className="online">
+
+            ● Online
+
+          </p>
+
+        </div>
+
+      </div>
+
     </div>
+
   );
+
 }
 
 export default Header;
