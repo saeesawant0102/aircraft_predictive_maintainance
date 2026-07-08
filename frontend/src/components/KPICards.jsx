@@ -1,5 +1,14 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
+import "./KPICards.css";
+
+import {
+  Cpu,
+  ShieldCheck,
+  TriangleAlert,
+  Siren,
+  TimerReset,
+} from "lucide-react";
 
 function KPICards() {
   const [summary, setSummary] = useState(null);
@@ -10,73 +19,61 @@ function KPICards() {
       .catch((err) => console.log(err));
   }, []);
 
-  if (!summary) return <p>Loading...</p>;
+  if (!summary) return <p style={{ color: "white" }}>Loading...</p>;
 
   const cards = [
     {
       title: "Total Engines",
       value: summary.total_engines,
       color: "#35D6FF",
+      icon: <Cpu size={28} />,
     },
     {
       title: "Healthy",
       value: summary.healthy,
       color: "#38D27A",
+      icon: <ShieldCheck size={28} />,
     },
     {
       title: "Warning",
       value: summary.warning,
       color: "#FFBE0B",
+      icon: <TriangleAlert size={28} />,
     },
     {
       title: "Critical",
       value: summary.critical,
       color: "#FF4D4F",
+      icon: <Siren size={28} />,
     },
     {
       title: "Average RUL",
       value: summary.avg_rul,
       color: "#00F5D4",
+      icon: <TimerReset size={28} />,
     },
   ];
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(5,1fr)",
-        gap: "20px",
-      }}
-    >
+    <div className="kpi-grid">
       {cards.map((card) => (
         <div
           key={card.title}
-          style={{
-            background: "#051F2B",
-            border: "1px solid #0B556B",
-            borderRadius: "20px",
-            padding: "25px",
-            minHeight: "170px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
+          className="kpi-card"
         >
           <div
+            className="kpi-icon"
             style={{
-              width: "50px",
-              height: "50px",
-              borderRadius: "12px",
-              border: `1px solid ${card.color}`,
-              marginBottom: "20px",
+              borderColor: card.color,
+              color: card.color,
             }}
-          />
+          >
+            {card.icon}
+          </div>
 
           <h1
             style={{
               color: card.color,
-              fontSize: "42px",
-              marginBottom: "10px",
             }}
           >
             {card.value}

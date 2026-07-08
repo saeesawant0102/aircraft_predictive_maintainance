@@ -138,11 +138,20 @@
   white-space: nowrap;
 }
 
-.fleet-table td {
-  padding: 18px 22px;
-  color: white;
-  font-size: 14px;
-  border-top: 1px solid var(--border);
+.fleet-table td{
+
+    padding:18px 22px;
+
+    color:white;
+
+    font-size:14px;
+
+    border-top:1px solid var(--border);
+
+    vertical-align:middle;
+
+    white-space:nowrap;
+
 }
 
 .fleet-table tbody tr {
@@ -207,24 +216,49 @@
 }
 
 /* ===========================
-   BUTTON
+   VIEW DETAILS BUTTON
 =========================== */
 
-.view-btn {
-  background: transparent;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: 10px;
-  padding: 9px 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: .25s;
+.view-btn{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:130px;
+    height:42px;
+
+    padding:0 18px;
+
+    background:transparent;
+
+    color:#00F5D4;
+
+    border:1px solid #00F5D4;
+
+    border-radius:10px;
+
+    font-size:14px;
+    font-weight:600;
+
+    white-space:nowrap;
+
+    cursor:pointer;
+
+    transition:all .25s ease;
+
 }
 
-.view-btn:hover {
-  background: var(--accent);
-  color: #031722;
-  transform: translateY(-2px);
+.view-btn:hover{
+
+    background:#00F5D4;
+
+    color:#02131C;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 25px rgba(0,245,212,.25);
+
 }
 
 /* ===========================

@@ -1,29 +1,139 @@
-.fleet-table-card {
-  background: #051f2b;
-  border: 1px solid #0b556b;
-  border-radius: 20px;
-  padding: 25px;
+.fleet-table-card{
+
+    background:#051F2B;
+
+    border:1px solid #0B556B;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    transition:all .3s ease;
+
 }
 
-.fleet-table-card h3 {
-  color: white;
-  margin-bottom: 20px;
+.fleet-table-card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#00F5D4;
+
+    box-shadow:0 18px 40px rgba(0,245,212,.12);
+
 }
 
-.fleet-table-card table {
-  width: 100%;
-  border-collapse: collapse;
+.fleet-table-card h3{
+
+    color:#ffffff;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    margin:0;
+
+    padding:24px 24px 18px;
+
+    line-height:1.2;
+
 }
 
-.fleet-table-card th {
-  color: #6ed7ff;
-  text-align: left;
-  padding: 14px;
-  border-bottom: 1px solid #123849;
+.fleet-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
 }
 
-.fleet-table-card td {
-  color: white;
-  padding: 14px;
-  border-bottom: 1px solid #123849;
+.fleet-table th{
+
+    color:#6ED7FF;
+
+    text-align:left;
+
+    padding:16px 18px;
+
+    border-bottom:1px solid #123849;
+
+    font-weight:600;
+
+}
+
+.fleet-table td{
+
+    color:white;
+
+    padding:16px 18px;
+
+    border-bottom:1px solid #123849;
+
+    transition:all .25s ease;
+
+}
+
+/* ===========================
+   ROW HOVER
+=========================== */
+
+.fleet-table tbody tr{
+
+    cursor:pointer;
+
+}
+
+.fleet-table tbody tr:hover td{
+
+    background:#0B3342;
+
+}
+
+.fleet-table tbody tr:hover td:first-child{
+
+    border-left:4px solid #00F5D4;
+
+    padding-left:14px;
+
+}
+
+/* ===========================
+   HEALTH DISTRIBUTION
+=========================== */
+
+.dashboard-chart{
+
+    background:#051F2B;
+
+    border:1px solid #0B556B;
+
+    border-radius:22px;
+
+    padding:25px;
+
+    transition:all .3s ease;
+
+}
+
+.dashboard-chart:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#00F5D4;
+
+    box-shadow:0 18px 40px rgba(0,245,212,.12);
+
+}
+
+.dashboard-chart h3{
+
+    color:white;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    margin:0 0 18px;
+
 }

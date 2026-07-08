@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Upload, Rocket, FileText } from "lucide-react";
 import API from "../services/api";
+import "./UploadPanel.css";
 
 function UploadPanel() {
   const [file, setFile] = useState(null);
@@ -17,15 +19,11 @@ function UploadPanel() {
     try {
       setLoading(true);
 
-      await API.post(
-        "/predict",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await API.post("/predict", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       alert("Prediction completed successfully!");
 
@@ -39,50 +37,57 @@ function UploadPanel() {
   };
 
   return (
-    <div
-      style={{
-        background: "#051F2B",
-        border: "1px solid #0B556B",
-        borderRadius: "20px",
-        padding: "25px",
-        marginBottom: "30px",
-      }}
-    >
-      <h2
-        style={{
-          color: "#00F5D4",
-          marginBottom: "15px",
-        }}
-      >
-        Upload Engine Dataset
-      </h2>
+    <div className="upload-card">
 
-      <input
-        type="file"
-        accept=".csv"
-        onChange={(e) =>
-          setFile(e.target.files[0])
-        }
-      />
+      <div className="upload-icon">
+        <Upload size={42} />
+      </div>
+
+      <h2>Upload Engine Dataset</h2>
+
+      <p>
+        Upload a CMAPSS CSV dataset for engine health
+        assessment and Remaining Useful Life prediction.
+      </p>
+
+      <div className="selected-file">
+
+        {file ? (
+          <>
+            <FileText size={18} />
+            <span>{file.name}</span>
+          </>
+        ) : (
+          <>
+            <FileText size={18} />
+            <span>No file selected</span>
+          </>
+        )}
+
+      </div>
+
+      <label className="browse-btn">
+        Browse CSV
+        <input
+          type="file"
+          accept=".csv"
+          onChange={(e) => setFile(e.target.files[0])}
+          hidden
+        />
+      </label>
 
       <button
-        onClick={handlePredict}
+        className="predict-btn"
         disabled={loading}
-        style={{
-          marginLeft: "15px",
-          background: "#00F5D4",
-          color: "#02111B",
-          border: "none",
-          padding: "10px 20px",
-          borderRadius: "10px",
-          cursor: "pointer",
-          fontWeight: "bold",
-        }}
+        onClick={handlePredict}
       >
+        <Rocket size={18} />
+
         {loading
-          ? "Running..."
+          ? "Running Prediction..."
           : "Run Prediction"}
       </button>
+
     </div>
   );
 }

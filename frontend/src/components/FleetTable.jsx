@@ -29,7 +29,7 @@ function FleetTable() {
     <div className="fleet-table-card">
       <h3>Fleet Snapshot — Top Risk Engines</h3>
 
-      <table>
+      <table className="fleet-table">
         <thead>
           <tr>
             <th>Engine</th>

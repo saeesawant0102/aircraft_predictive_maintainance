@@ -9,6 +9,9 @@ from dashboard_routes import (
 )
 from fastapi.responses import FileResponse
 
+from database.mongo import datasets_collection
+from datetime import datetime
+
 app = FastAPI(
     title="Aircraft Engine Predictive Maintenance API"
 )
@@ -64,6 +67,19 @@ async def predict(
         "../data/fleet_dashboard.csv",
         index=False
     )
+    """
+    datasets_collection.insert_one({
+
+    "filename": file.filename,
+
+    "uploaded_at": datetime.now(),
+
+    "rows": len(df),
+
+    "status": "Processed"
+
+    })
+    """
 
     return {
         "message": "Predictions generated successfully",

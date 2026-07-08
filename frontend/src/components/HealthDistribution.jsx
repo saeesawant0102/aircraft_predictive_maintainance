@@ -19,7 +19,11 @@ function HealthDistribution() {
   }, []);
 
   if (!summary) {
-    return <div className="chart-card">Loading...</div>;
+    return (
+      <div className="chart-card dashboard-chart">
+        Loading...
+      </div>
+    );
   }
 
   const data = [
@@ -41,7 +45,7 @@ function HealthDistribution() {
   ];
 
   return (
-    <div className="chart-card">
+    <div className="chart-card dashboard-chart">
       <h3>Health Distribution</h3>
 
       <ResponsiveContainer width="100%" height={300}>

@@ -1,0 +1,151 @@
+.kpi-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:22px;
+    margin-bottom:35px;
+}
+
+.kpi-card{
+    background:#051F2B;
+    border:1px solid #0B556B;
+    border-radius:22px;
+    padding:28px;
+    min-height:185px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    transition:.28s;
+    overflow:hidden;
+    position:relative;
+}
+
+.kpi-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-100%;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.05),
+        transparent
+    );
+
+    transition:.6s;
+
+}
+
+.kpi-card:hover::before{
+
+    left:120%;
+
+}
+
+.kpi-card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#00F5D4;
+
+    box-shadow:0 18px 40px rgba(0,245,212,.12);
+
+}
+
+.kpi-icon{
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:15px;
+
+    border:1px solid;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:22px;
+
+    transition:.3s;
+
+}
+
+.kpi-card:hover .kpi-icon{
+
+    transform:rotate(-8deg) scale(1.12);
+
+    box-shadow:0 0 20px rgba(0,245,212,.15);
+
+}
+
+.kpi-card h1{
+
+    font-size:46px;
+
+    margin:0;
+
+    transition:.25s;
+
+}
+
+.kpi-card:hover h1{
+
+    transform:scale(1.05);
+
+}
+
+.kpi-card h3{
+
+    margin-top:14px;
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+@media(max-width:1500px){
+
+.kpi-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+}
+
+@media(max-width:900px){
+
+.kpi-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:650px){
+
+.kpi-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
