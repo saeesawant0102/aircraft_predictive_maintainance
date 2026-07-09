@@ -70,7 +70,7 @@ function RULTrendChart({ history }) {
             label={{
               value:"Engine Cycle",
               position:"bottom",
-              dy:18,
+              dy:12,
               fill:"#7FC8E8",
               fontSize:15,
               fontWeight:600,
@@ -90,7 +90,7 @@ function RULTrendChart({ history }) {
               value:"Predicted RUL",
               angle:-90,
               position:"left",
-              dx:-15,
+              dx:-1,
               fill:"#7FC8E8",
               fontSize:15,
               fontWeight:600,

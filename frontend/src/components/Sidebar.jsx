@@ -1,94 +1,123 @@
+import {
+  LayoutDashboard,
+  Plane,
+  Cpu,
+  Activity,
+  TrendingUp,
+  FileText,
+} from "lucide-react";
+
 import { NavLink } from "react-router-dom";
+
+import "./Sidebar.css";
 
 const menuItems = [
   {
     name: "Dashboard",
     path: "/",
+    icon: <LayoutDashboard size={20} />,
   },
   {
     name: "Fleet Overview",
     path: "/fleet",
+    icon: <Plane size={20} />,
   },
   {
     name: "Engine Details",
     path: "/engine/1",
+    icon: <Cpu size={20} />,
   },
   {
     name: "Sensor Analysis",
     path: "/sensors",
+    icon: <Activity size={20} />,
   },
   {
     name: "RUL Prediction",
     path: "/rul",
+    icon: <TrendingUp size={20} />,
   },
   {
     name: "Reports & History",
     path: "/reports",
+    icon: <FileText size={20} />,
   },
 ];
 
 function Sidebar() {
   return (
-    <div
-      style={{
-        width: "280px",
-        background: "#031722",
-        borderRight: "1px solid #08384A",
-        height: "100vh",
-        padding: "30px 20px",
-        position: "fixed",
-        left: 0,
-        top: 0,
-      }}
-    >
-      <h1
-        style={{
-          color: "#00F5D4",
-          marginBottom: "10px",
-          fontSize: "48px",
-          fontWeight: "700",
-        }}
-      >
-        AeroGuard
-      </h1>
+    <aside className="sidebar">
 
-      <p
-        style={{
-          color: "#7CA4B8",
-          marginBottom: "45px",
-          fontSize: "18px",
-        }}
-      >
-        Predictive Maintenance
-      </p>
+      <div className="sidebar-logo">
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "12px",
-        }}
-      >
+        <div className="logo-icon">
+
+          <Plane size={28} />
+
+        </div>
+
+        <div>
+
+          <h1>AeroGuard</h1>
+
+          <p>PREDICTIVE MAINTENANCE</p>
+
+        </div>
+
+      </div>
+
+      <nav className="sidebar-menu">
+
         {menuItems.map((item) => (
+
           <NavLink
             key={item.name}
             to={item.path}
             end={item.path === "/"}
-            style={({ isActive }) => ({
-              color: isActive ? "#00F5D4" : "#FFFFFF",
-              background: isActive ? "#072636" : "transparent",
-              padding: "12px 15px",
-              borderRadius: "10px",
-              textDecoration: "none",
-              fontWeight: isActive ? "600" : "500",
-              transition: "0.25s",
-            })}
+            className={({ isActive }) =>
+              isActive
+                ? "sidebar-link active"
+                : "sidebar-link"
+            }
           >
-            {item.name}
+
+            <div className="menu-icon-box">
+
+                <span className="menu-icon">
+
+                    {item.icon}
+
+                </span>
+
+            </div>
+
+            <span>
+
+              {item.name}
+
+            </span>
+
           </NavLink>
+
         ))}
+
+      </nav>
+
+      <div className="sidebar-footer">
+
+        <div className="footer-dot" />
+
+        <div>
+
+          <h4>Airline System</h4>
+
+          <p>Connected</p>
+
+        </div>
+
       </div>
-    </div>
+
+    </aside>
   );
 }
 

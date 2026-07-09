@@ -44,19 +44,15 @@ function FleetTable() {
             <tr key={engine.engine_id}>
               <td>ENG-{engine.engine_id}</td>
 
-              <td
-                style={{
-                  color:
-                    engine.Health_Status === "Critical"
-                      ? "#FF4D4F"
-                      : engine.Health_Status === "Warning"
-                      ? "#FFBE0B"
-                      : "#38D27A",
-                }}
-              >
-                {engine.Health_Status}
-              </td>
+              <td>
+                <span
+                  className={`status-pill ${engine.Health_Status.toLowerCase()}`}
+                >
+                  <span className="status-dot"></span>
 
+                  {engine.Health_Status}
+                </span>
+              </td>
               <td>{engine.Health_Score}</td>
 
               <td>{Math.round(engine.Predicted_RUL)}</td>

@@ -48,12 +48,12 @@ function HealthDistribution() {
     <div className="chart-card dashboard-chart">
       <h3>Health Distribution</h3>
 
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height={380}>
         <PieChart>
           <Pie
             data={data}
             innerRadius={70}
-            outerRadius={100}
+            outerRadius={110}
             dataKey="value"
           >
             {data.map((entry, index) => (

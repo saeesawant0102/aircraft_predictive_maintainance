@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700&display=swap');
+
 .header{
 
     height:110px;
 
-    padding:0 42px;
+    padding:0 45px;
 
     display:flex;
 
@@ -11,6 +13,8 @@
     align-items:center;
 
     border-bottom:1px solid #08384A;
+
+    background:#031722;
 
 }
 
@@ -32,9 +36,11 @@
 
     margin:0;
 
-    font-size:52px;
+    font-size:54px;
 
     font-weight:800;
+
+    font-family:'Inter',sans-serif;
 
     color:white;
 
@@ -48,16 +54,20 @@
 
     margin-top:10px;
 
-    color:#7EAFC4;
+    color:#79B9D3;
 
-    font-size:19px;
+    font-size:14px;
 
-    font-weight:500;
+    font-family:'Orbitron',sans-serif;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
 
 }
 
 /* ===========================
-   RIGHT SIDE
+   ADMIN CARD
 =========================== */
 
 .admin-profile{
@@ -68,38 +78,42 @@
 
     gap:18px;
 
+    padding:15px 22px;
+
     background:#051F2B;
 
     border:1px solid #0B556B;
 
-    border-radius:16px;
+    border-radius:18px;
 
-    padding:14px 22px;
+    transition:all .3s ease;
 
-    transition:.25s;
+    cursor:pointer;
 
 }
 
 .admin-profile:hover{
 
+    transform:translateY(-3px);
+
     border-color:#00F5D4;
 
-    box-shadow:0 0 18px rgba(0,245,212,.15);
+    box-shadow:0 12px 30px rgba(0,245,212,.14);
 
 }
 
 .admin-avatar{
 
-    width:56px;
+    width:58px;
 
-    height:56px;
+    height:58px;
 
-    border-radius:50%;
+    border-radius:16px;
 
     background:linear-gradient(
         135deg,
         #00F5D4,
-        #5CC8FF
+        #35D6FF
     );
 
     display:flex;
@@ -126,11 +140,11 @@
 
 .admin-info p{
 
-    margin:3px 0;
+    margin:4px 0;
 
-    color:#8DB2C3;
+    color:#8FB3C3;
 
-    font-size:14px;
+    font-size:13px;
 
 }
 
@@ -138,6 +152,8 @@
 
     color:#38D27A !important;
 
-    font-weight:600;
+    font-weight:700;
+
+    letter-spacing:.5px;
 
 }

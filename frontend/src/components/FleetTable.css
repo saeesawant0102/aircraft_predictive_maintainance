@@ -137,3 +137,75 @@
     margin:0 0 18px;
 
 }
+
+/* ===========================
+   STATUS PILLS
+=========================== */
+
+.status-pill{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:7px 14px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    border:1px solid transparent;
+
+}
+
+.status-dot{
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:currentColor;
+
+}
+
+/* Healthy */
+
+.status-pill.healthy{
+
+    background:rgba(56,210,122,.12);
+
+    color:#38D27A;
+
+    border-color:rgba(56,210,122,.35);
+
+}
+
+/* Warning */
+
+.status-pill.warning{
+
+    background:rgba(255,190,11,.12);
+
+    color:#FFBE0B;
+
+    border-color:rgba(255,190,11,.35);
+
+}
+
+/* Critical */
+
+.status-pill.critical{
+
+    background:rgba(255,77,79,.14);
+
+    color:#FF4D4F;
+
+    border-color:rgba(255,77,79,.35);
+
+}
