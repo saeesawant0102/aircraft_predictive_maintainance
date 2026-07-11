@@ -11,10 +11,8 @@ client = MongoClient(MONGO_URI)
 
 db = client[DATABASE_NAME]
 
-datasets_collection = db["datasets"]
+print("✅ Connected Successfully!")
 
-prediction_runs_collection = db["prediction_runs"]
+print("Database Name:", db.name)
 
-engine_predictions_collection = db["engine_predictions"]
-
-print("✅ MongoDB Connected!")
+print("Collections:", db.list_collection_names())
