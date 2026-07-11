@@ -11,6 +11,94 @@ import "./ReportsHistory.css";
 
 function ReportCards() {
 
+  const previewReport = (title) => {
+
+    const routes = {
+
+      "Fleet Health Report": "fleet",
+
+      "Sensor Analysis Report": "sensors",
+
+      "Maintenance Report": "maintenance",
+
+      "Engine Performance Report": "engine",
+
+    };
+
+    window.open(
+
+      `http://127.0.0.1:8000/reports/${routes[title]}`,
+
+      "_blank"
+
+    );
+
+  };
+
+  const downloadReport = async (title) => {
+
+  const routes = {
+
+    "Fleet Health Report": {
+      endpoint: "fleet",
+      filename: "Fleet_Health_Report.pdf",
+    },
+
+    "Sensor Analysis Report": {
+      endpoint: "sensors",
+      filename: "Sensor_Analysis_Report.pdf",
+    },
+
+    "Maintenance Report": {
+      endpoint: "maintenance",
+      filename: "Maintenance_Report.pdf",
+    },
+
+    "Engine Performance Report": {
+      endpoint: "engine",
+      filename: "Engine_Performance_Report.pdf",
+    },
+
+  };
+
+  try {
+
+    const response = await fetch(
+
+      `http://127.0.0.1:8000/reports/${routes[title].endpoint}`
+
+    );
+
+    const blob = await response.blob();
+
+    const url = window.URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+
+    link.href = url;
+
+    link.download = routes[title].filename;
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    window.URL.revokeObjectURL(url);
+
+  }
+
+  catch (err) {
+
+    console.error(err);
+
+    alert("Failed to download report.");
+
+  }
+
+};
+
   const reports = [
 
     {
@@ -47,7 +135,7 @@ function ReportCards() {
 
     <div className="reports-grid">
 
-      {reports.map((report,index)=>(
+      {reports.map((report, index) => (
 
         <div
           className="report-card"
@@ -82,7 +170,10 @@ function ReportCards() {
 
           <div className="report-actions">
 
-            <button className="preview-btn">
+            <button
+              className="preview-btn"
+              onClick={() => previewReport(report.title)}
+            >
 
               <Eye size={18}/>
 
@@ -90,7 +181,10 @@ function ReportCards() {
 
             </button>
 
-            <button className="download-btn">
+            <button
+              className="download-btn"
+              onClick={() => downloadReport(report.title)}
+            >
 
               <Download size={18}/>
 

@@ -1,157 +1,314 @@
+import { useEffect, useState } from "react";
 import {
   Database,
   Eye,
   Trash2,
 } from "lucide-react";
 
+import API from "../../services/api";
+
 import "./ReportsHistory.css";
 
 function DatasetHistory() {
 
-  const datasets = [
+  const [datasets, setDatasets] = useState([]);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [selectedDataset, setSelectedDataset] = useState(null);
+  const [showView, setShowView] = useState(false);
+  const [datasetDetails, setDatasetDetails] = useState(null);
 
-    {
-      name:"CMAPSS_FD001.csv",
-      uploaded:"08 Jul 2026",
-      records:"20,631",
-      status:"Processed",
-    },
+  useEffect(() => {
 
-    {
-      name:"CMAPSS_FD002.csv",
-      uploaded:"07 Jul 2026",
-      records:"53,759",
-      status:"Processed",
-    },
+    API.get("/datasets")
+      .then((res) => {
+        setDatasets(res.data);
+      })
+      .catch(console.error);
 
-    {
-      name:"Fleet_Test_Data.csv",
-      uploaded:"05 Jul 2026",
-      records:"15,842",
-      status:"Processed",
-    },
+  }, []);
 
-  ];
+  const deleteDataset = async () => {
+
+    try {
+
+      await API.delete(`/datasets/${selectedDataset.id}`);
+
+      setDatasets(
+        datasets.filter(
+          (item) => item.id !== selectedDataset.id
+        )
+      );
+
+      setShowConfirm(false);
+
+      setSelectedDataset(null);
+
+    } catch (err) {
+
+      console.error(err);
+
+      alert("Failed to delete dataset.");
+
+    }
+
+  };
+
+  const viewDataset = async (id) => {
+
+    try {
+
+      const res = await API.get(`/datasets/${id}`);
+
+      setDatasetDetails(res.data);
+
+      setShowView(true);
+
+    }
+
+    catch(err){
+
+      console.error(err);
+
+      alert("Unable to load dataset.");
+
+    }
+
+  };
 
   return (
 
-    <div className="dataset-card">
+    <>
 
-      <div className="history-header">
+      <div className="dataset-card">
 
-        <h2>
+        <div className="history-header">
 
-          Dataset History
+          <h2>
+            Dataset History
+          </h2>
 
-        </h2>
+          <p>
+            Previously processed datasets available for review.
+          </p>
 
-        <p>
+        </div>
 
-          Previously processed datasets available for review.
+        <table className="history-table">
 
-        </p>
+          <thead>
 
-      </div>
+            <tr>
 
-      <table className="history-table">
+              <th>Dataset</th>
 
-        <thead>
+              <th>Upload Date</th>
 
-          <tr>
+              <th>Rows</th>
 
-            <th>Dataset</th>
+              <th>Status</th>
 
-            <th>Upload Date</th>
-
-            <th>Records</th>
-
-            <th>Status</th>
-
-            <th>Actions</th>
-
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          {datasets.map((file,index)=>(
-
-            <tr key={index}>
-
-              <td>
-
-                <div className="dataset-name">
-
-                  <Database
-                    size={18}
-                  />
-
-                  {file.name}
-
-                </div>
-
-              </td>
-
-              <td>
-
-                {file.uploaded}
-
-              </td>
-
-              <td>
-
-                {file.records}
-
-              </td>
-
-              <td>
-
-                <span className="status-green">
-
-                  {file.status}
-
-                </span>
-
-              </td>
-
-              <td>
-
-                <div className="dataset-actions">
-
-                  <button
-                    className="view-btn"
-                  >
-
-                    <Eye
-                      size={17}
-                    />
-
-                  </button>
-
-                  <button
-                    className="delete-btn"
-                  >
-
-                    <Trash2
-                      size={17}
-                    />
-
-                  </button>
-
-                </div>
-
-              </td>
+              <th>Actions</th>
 
             </tr>
 
-          ))}
+          </thead>
 
-        </tbody>
+          <tbody>
 
-      </table>
+            {datasets.map((file) => (
 
-    </div>
+              <tr key={file.id}>
+
+                <td>
+
+                  <div className="dataset-name">
+
+                    <Database size={18}/>
+
+                    {file.filename}
+
+                  </div>
+
+                </td>
+
+                <td>
+
+                  {new Date(file.uploaded_at).toLocaleString()}
+
+                </td>
+
+                <td>
+
+                  {file.rows.toLocaleString()}
+
+                </td>
+
+                <td>
+
+                  <span className="status-green">
+
+                    {file.status}
+
+                  </span>
+
+                </td>
+
+                <td>
+
+                  <div className="dataset-actions">
+
+                    <button className="view-btn"
+                      onClick={() => viewDataset(file.id)}  
+                    >
+
+                      <Eye size={17}/>
+
+                    </button>
+
+                    <button
+                      className="delete-btn"
+                      onClick={() => {
+                        setSelectedDataset(file);
+                        setShowConfirm(true);
+                      }}
+                    >
+
+                      <Trash2 size={17}/>
+
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            ))}
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      {showConfirm && (
+
+        <div className="confirm-overlay">
+
+          <div className="confirm-box">
+
+            <h2>Delete Dataset?</h2>
+
+            <p>
+
+              This will permanently delete
+
+              <b> {selectedDataset?.filename}</b>
+
+              and all associated prediction history.
+
+            </p>
+
+            <div className="confirm-buttons">
+
+              <button
+                className="cancel-btn"
+                onClick={() => setShowConfirm(false)}
+              >
+                Cancel
+              </button>
+
+              <button
+                className="delete-confirm-btn"
+                onClick={deleteDataset}
+              >
+                Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      )}
+
+      {
+  showView && datasetDetails && (
+
+  <div className="confirm-overlay">
+
+      <div className="confirm-box">
+
+          <h2>
+
+              Dataset Details
+
+          </h2>
+
+          <p>
+
+              <b>Filename:</b> {datasetDetails.filename}
+
+              <br/><br/>
+
+              <b>Uploaded:</b>{" "}
+
+              {new Date(datasetDetails.uploaded_at).toLocaleString()}
+
+              <br/><br/>
+
+              <b>Rows:</b> {datasetDetails.rows}
+
+              <br/><br/>
+
+              <b>Columns:</b> {datasetDetails.columns}
+
+              <br/><br/>
+
+              <b>Engines:</b> {datasetDetails.engines}
+
+              <br/><br/>
+
+              <b>Status:</b> {datasetDetails.status}
+
+              <br/><br/>
+
+              <b>Healthy:</b> {datasetDetails.healthy}
+
+              <br/>
+
+              <b>Warning:</b> {datasetDetails.warning}
+
+              <br/>
+
+              <b>Critical:</b> {datasetDetails.critical}
+
+              <br/>
+
+              <b>Average RUL:</b> {Math.round(datasetDetails.avg_rul)}
+
+          </p>
+
+          <div className="confirm-buttons">
+
+              <button
+                  className="cancel-btn"
+                  onClick={() => setShowView(false)}
+              >
+                  Close
+              </button>
+
+          </div>
+
+      </div>
+
+  </div>
+
+  )
+  }
+
+    </>
 
   );
 

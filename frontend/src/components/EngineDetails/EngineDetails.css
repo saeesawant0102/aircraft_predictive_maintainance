@@ -990,3 +990,49 @@ white-space:nowrap;
     box-shadow:0 0 20px rgba(255,77,79,.18);
 
 }
+
+.engine-header-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+.engine-selector{
+
+    background:#051F2B;
+
+    color:white;
+
+    border:1px solid #0B556B;
+
+    border-radius:12px;
+
+    padding:10px 16px;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.engine-selector:hover{
+
+    border-color:#00F5D4;
+
+}
+
+.engine-selector:focus{
+
+    outline:none;
+
+    border-color:#00F5D4;
+
+    box-shadow:0 0 10px rgba(0,245,212,.25);
+
+}

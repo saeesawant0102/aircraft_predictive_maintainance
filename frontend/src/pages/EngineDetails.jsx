@@ -17,12 +17,25 @@ function EngineDetails() {
   const { engineId } = useParams();
 
   const [engine, setEngine] = useState(null);
+  const [engineList, setEngineList] = useState([]);
 
   useEffect(() => {
-    API.get(`/engine/${engineId}`)
-      .then((res) => setEngine(res.data))
-      .catch((err) => console.log(err));
-  }, [engineId]);
+
+  API.get(`/engine/${engineId}`)
+    .then((res) => setEngine(res.data))
+    .catch(console.error);
+
+  API.get("/fleet")
+    .then((res) => {
+
+      const ids = res.data.map((e) => e.engine_id);
+
+      setEngineList(ids);
+
+    })
+    .catch(console.error);
+
+}, [engineId]);
 
   if (!engine)
     return (
@@ -52,27 +65,49 @@ function EngineDetails() {
 
         <div className="engine-header">
 
-          <div className="engine-title">
+  <div className="engine-title">
 
-            <h1>
-              Engine {engine.engine_id}
-            </h1>
+    <h1>
+      Engine {engine.engine_id}
+    </h1>
 
-            <p>
-              Detailed health information and prediction results
-            </p>
+    <p>
+      Detailed health information and prediction results
+    </p>
 
-          </div>
+  </div>
 
-          <button
-            className="back-btn"
-            onClick={() => navigate("/fleet")}
-          >
-            ← Back to Fleet
-          </button>
+  <div className="engine-header-actions">
 
-        </div>
+    <select
+      className="engine-selector"
+      value={engineId}
+      onChange={(e) => navigate(`/engine/${e.target.value}`)}
+    >
 
+      {engineList.map((id) => (
+
+        <option
+          key={id}
+          value={id}
+        >
+          Engine {id}
+        </option>
+
+      ))}
+
+    </select>
+
+    <button
+      className="back-btn"
+      onClick={() => navigate("/fleet")}
+    >
+      ← Back to Fleet
+    </button>
+
+  </div>
+
+</div>
         {/* Summary Cards */}
 
         <div className="summary-grid">

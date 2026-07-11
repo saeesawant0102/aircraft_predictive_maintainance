@@ -460,3 +460,149 @@ DATASET HISTORY
     color:#031722;
 
 }
+
+/*====================================================
+DELETE CONFIRMATION
+====================================================*/
+
+.confirm-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    backdrop-filter:blur(5px);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.confirm-box{
+
+    width:460px;
+
+    background:#051F2B;
+
+    border:1px solid #0B556B;
+
+    border-radius:20px;
+
+    padding:32px;
+
+    animation:popup .25s ease;
+
+}
+
+.confirm-box h2{
+
+    color:white;
+
+    margin-bottom:16px;
+
+    font-size:28px;
+
+}
+
+.confirm-box p{
+
+    color:#8CB4C5;
+
+    line-height:1.8;
+
+    margin-bottom:28px;
+
+}
+
+.confirm-box b{
+
+    color:#00F5D4;
+
+}
+
+.confirm-buttons{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:14px;
+
+}
+
+.cancel-btn{
+
+    background:#082432;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:12px 22px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.cancel-btn:hover{
+
+    background:#10384B;
+
+}
+
+.delete-confirm-btn{
+
+    background:#FF4D4F;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:12px 22px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.delete-confirm-btn:hover{
+
+    background:#ff2f32;
+
+    transform:translateY(-2px);
+
+}
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.92);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}

@@ -1,7 +1,6 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
-
+from fastapi.responses import FileResponse, StreamingResponse
 import pandas as pd
 from datetime import datetime
 
@@ -16,6 +15,13 @@ from database.mongo import (
     datasets_collection,
     prediction_runs_collection,
     engine_predictions_collection,
+)
+
+from reports import (
+    generate_fleet_report,
+    generate_sensor_report,
+    generate_maintenance_report,
+    generate_engine_report,
 )
 
 from bson import ObjectId
@@ -287,8 +293,284 @@ def prediction_history():
 
             "warning": run["warning"],
 
-            "critical": run["critical"]
+            "critical": run["critical"],
+
+            "status": "Completed"
 
         })
 
     return history
+
+@app.get("/datasets")
+def get_datasets():
+
+    datasets = list(
+        datasets_collection.find().sort("uploaded_at", -1)
+    )
+
+    result = []
+
+    for dataset in datasets:
+
+        result.append({
+
+            "id": str(dataset["_id"]),
+            "filename": dataset["filename"],
+            "uploaded_at": dataset["uploaded_at"],
+            "rows": dataset["rows"],
+            "columns": dataset["columns"],
+            "engines": dataset["engines"],
+            "status": dataset["status"]
+
+        })
+
+    return result
+
+
+@app.delete("/datasets/{dataset_id}")
+def delete_dataset(dataset_id: str):
+
+    dataset_object_id = ObjectId(dataset_id)
+
+    prediction_runs = prediction_runs_collection.find(
+        {
+            "dataset_id": dataset_object_id
+        }
+    )
+
+    run_ids = [
+        run["_id"]
+        for run in prediction_runs
+    ]
+
+    if run_ids:
+
+        engine_predictions_collection.delete_many(
+            {
+                "run_id": {
+                    "$in": run_ids
+                }
+            }
+        )
+
+    prediction_runs_collection.delete_many(
+        {
+            "dataset_id": dataset_object_id
+        }
+    )
+
+    datasets_collection.delete_one(
+        {
+            "_id": dataset_object_id
+        }
+    )
+
+    return {
+        "message": "Dataset deleted successfully"
+    }
+
+@app.get("/datasets/{dataset_id}")
+def get_dataset(dataset_id: str):
+
+    dataset = datasets_collection.find_one({
+        "_id": ObjectId(dataset_id)
+    })
+
+    if not dataset:
+        return {"error": "Dataset not found"}
+
+    prediction = prediction_runs_collection.find_one(
+        {
+            "dataset_id": dataset["_id"]
+        },
+        sort=[("prediction_time", -1)]
+    )
+
+    return {
+
+        "id": str(dataset["_id"]),
+
+        "filename": dataset["filename"],
+
+        "uploaded_at": dataset["uploaded_at"],
+
+        "rows": dataset["rows"],
+
+        "columns": dataset["columns"],
+
+        "engines": dataset["engines"],
+
+        "status": dataset["status"],
+
+        "healthy": prediction["healthy"] if prediction else 0,
+
+        "warning": prediction["warning"] if prediction else 0,
+
+        "critical": prediction["critical"] if prediction else 0,
+
+        "avg_rul": prediction["avg_rul"] if prediction else 0
+
+    }
+
+@app.delete("/prediction-runs/{run_id}")
+def delete_prediction_run(run_id: str):
+
+    run_object_id = ObjectId(run_id)
+
+    engine_predictions_collection.delete_many({
+        "run_id": run_object_id
+    })
+
+    prediction_runs_collection.delete_one({
+        "_id": run_object_id
+    })
+
+    return {
+        "message": "Prediction run deleted successfully"
+    }
+
+@app.get("/reports/fleet")
+def fleet_report():
+
+    fleet_df = get_fleet_data()
+
+    summary = {
+
+        "total_engines": len(fleet_df),
+
+        "healthy": int(
+            fleet_df["Health_Status"]
+            .eq("Healthy")
+            .sum()
+        ),
+
+        "warning": int(
+            fleet_df["Health_Status"]
+            .eq("Warning")
+            .sum()
+        ),
+
+        "critical": int(
+            fleet_df["Health_Status"]
+            .eq("Critical")
+            .sum()
+        ),
+
+        "avg_rul": int(
+            fleet_df["Predicted_RUL"]
+            .mean()
+        ),
+
+    }
+
+    pdf = generate_fleet_report(summary)
+
+    return StreamingResponse(
+
+        pdf,
+
+        media_type="application/pdf",
+
+        headers={
+
+            "Content-Disposition":
+            "inline; filename=Fleet_Health_Report.pdf"
+
+        }
+
+    )
+
+@app.get("/reports/sensors")
+def sensor_report():
+
+    fleet_df = get_fleet_data()
+
+    summary = {
+
+        "healthy": int(fleet_df["Health_Status"].eq("Healthy").sum()),
+
+        "warning": int(fleet_df["Health_Status"].eq("Warning").sum()),
+
+        "critical": int(fleet_df["Health_Status"].eq("Critical").sum()),
+
+        "avg_rul": int(fleet_df["Predicted_RUL"].mean())
+
+    }
+
+    pdf = generate_sensor_report(summary)
+
+    return StreamingResponse(
+
+        pdf,
+
+        media_type="application/pdf",
+
+        headers={
+
+            "Content-Disposition":"inline; filename=Sensor_Report.pdf"
+
+        }
+
+    )
+
+
+@app.get("/reports/maintenance")
+def maintenance_report():
+
+    fleet_df = get_fleet_data()
+
+    summary = {
+
+        "warning": int(fleet_df["Health_Status"].eq("Warning").sum()),
+
+        "critical": int(fleet_df["Health_Status"].eq("Critical").sum())
+
+    }
+
+    pdf = generate_maintenance_report(summary)
+
+    return StreamingResponse(
+
+        pdf,
+
+        media_type="application/pdf",
+
+        headers={
+
+            "Content-Disposition":"inline; filename=Maintenance_Report.pdf"
+
+        }
+
+    )
+
+
+@app.get("/reports/engine")
+def engine_report():
+
+    fleet_df = get_fleet_data()
+
+    summary = {
+
+        "total_engines": len(fleet_df),
+
+        "avg_rul": int(fleet_df["Predicted_RUL"].mean())
+
+    }
+
+    pdf = generate_engine_report(summary)
+
+    return StreamingResponse(
+
+        pdf,
+
+        media_type="application/pdf",
+
+        headers={
+
+            "Content-Disposition":"inline; filename=Engine_Report.pdf"
+
+        }
+
+    )
+
+

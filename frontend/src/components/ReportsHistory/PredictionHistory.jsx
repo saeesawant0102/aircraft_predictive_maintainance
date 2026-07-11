@@ -8,14 +8,52 @@ import "./ReportsHistory.css";
 function PredictionHistory() {
 
   const [history, setHistory] = useState([]);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [selectedRun, setSelectedRun] = useState(null);
 
   useEffect(() => {
 
-    API.get("/fleet")
-      .then((res) => setHistory(res.data))
+    API.get("/prediction-history")
+      .then((res) => {
+        setHistory(res.data);
+      })
       .catch(console.error);
 
   }, []);
+
+  const deleteRun = async () => {
+
+    try{
+
+        await API.delete(
+            `/prediction-runs/${selectedRun.run_id}`
+        );
+
+        setHistory(
+
+            history.filter(
+
+                (run)=>run.run_id!==selectedRun.run_id
+
+            )
+
+        );
+
+        setShowConfirm(false);
+
+        setSelectedRun(null);
+
+    }
+
+    catch(err){
+
+        console.error(err);
+
+        alert("Failed to delete prediction run.");
+
+    }
+
+  };
 
   return (
 
@@ -24,15 +62,11 @@ function PredictionHistory() {
       <div className="history-header">
 
         <h2>
-
           Prediction History
-
         </h2>
 
         <p>
-
-          Recent prediction results available in the system.
-
+          All prediction runs stored in MongoDB.
         </p>
 
       </div>
@@ -43,13 +77,19 @@ function PredictionHistory() {
 
           <tr>
 
-            <th>Engine</th>
+            <th>Dataset</th>
 
-            <th>Health</th>
+            <th>Prediction Time</th>
 
-            <th>Predicted RUL</th>
+            <th>Engines</th>
 
-            <th>Recommendation</th>
+            <th>Healthy</th>
+
+            <th>Warning</th>
+
+            <th>Critical</th>
+
+            <th>Status</th>
 
             <th>Action</th>
 
@@ -59,51 +99,62 @@ function PredictionHistory() {
 
         <tbody>
 
-          {history.map((engine)=>(
+          {history.map((run) => (
 
-            <tr key={engine.engine_id}>
+            <tr key={run.run_id}>
 
               <td>
+                {run.dataset_name}
+              </td>
 
-                ENG-{engine.engine_id}
+              <td>
+                {new Date(run.prediction_time).toLocaleString()}
+              </td>
 
+              <td>
+                {run.total_engines}
+              </td>
+
+              <td>
+                <span className="status-green">
+                  {run.healthy}
+                </span>
+              </td>
+
+              <td>
+                <span className="status-yellow">
+                  {run.warning}
+                </span>
+              </td>
+
+              <td>
+                <span className="status-red">
+                  {run.critical}
+                </span>
               </td>
 
               <td>
 
-                <span
-                  className={
-                    engine.Health_Status === "Healthy"
-                      ? "status-green"
-                      : engine.Health_Status === "Warning"
-                      ? "status-yellow"
-                      : "status-red"
-                  }
-                >
-
-                  {engine.Health_Status}
-
+                <span className="status-green">
+                  {run.status}
                 </span>
 
               </td>
 
               <td>
 
-                {Math.round(engine.Predicted_RUL)}
+                <button
+                    className="delete-btn"
+                    onClick={() => {
 
-              </td>
+                        setSelectedRun(run);
 
-              <td>
+                        setShowConfirm(true);
 
-                {engine.Recommendation}
+                    }}
+                >
 
-              </td>
-
-              <td>
-
-                <button className="delete-btn">
-
-                  <Trash2 size={17}/>
+                    <Trash2 size={17}/>
 
                 </button>
 
@@ -116,8 +167,61 @@ function PredictionHistory() {
         </tbody>
 
       </table>
+        
+      {showConfirm && (
+
+    <div className="confirm-overlay">
+
+        <div className="confirm-box">
+
+            <h2>
+
+                Delete Prediction Run?
+
+            </h2>
+
+            <p>
+
+                This will permanently delete the prediction run for
+
+                <b> {selectedRun?.dataset_name}</b>
+
+                and all associated engine predictions.
+
+            </p>
+
+            <div className="confirm-buttons">
+
+                <button
+                    className="cancel-btn"
+                    onClick={() => {
+
+                        setShowConfirm(false);
+
+                        setSelectedRun(null);
+
+                    }}
+                >
+                    Cancel
+                </button>
+
+                <button
+                    className="delete-confirm-btn"
+                    onClick={deleteRun}
+                >
+                    Delete
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
+
+)}
+    </div>
+
+    
 
   );
 
